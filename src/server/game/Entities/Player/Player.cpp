@@ -26666,7 +26666,6 @@ void Player::SetSpectate(bool on)
 		spectateCanceled = false;
 		spectatorFlag = false;
 		RestoreDisplayId();
-		UpdateSpeed(MOVE_RUN, true);
 	}
 	UpdateObjectVisibility();
 }

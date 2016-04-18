@@ -5,9 +5,7 @@
 ## Build Status
 
 3.3.5
-:------------: | :------------:
-[![3.3.5 Build Status](https://travis-ci.org/TrinityCore/TrinityCore.svg?branch=3.3.5)](https://travis-ci.org/TrinityCore/TrinityCore) |
-[![Coverity Scan Build Status](https://travis-ci.org/martial69320/cerberus.svg)](https://scan.coverity.com/projects/435) |
+[![3.3.5 Build Status](https://travis-ci.org/martial69320/cerberus.svg)](https://travis-ci.org/martial69320/cerberus) 
 
 ## Introduction
 

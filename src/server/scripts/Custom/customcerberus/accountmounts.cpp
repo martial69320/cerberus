@@ -1,3 +1,11 @@
+#include "DisableMgr.h"
+#include "Define.h"
+#include "GossipDef.h"
+#include "Item.h"
+#include "Player.h"
+#include "ScriptedGossip.h"
+#include "ScriptMgr.h"
+#include "Spell.h"
 class AccountMounts : public PlayerScript
 {
     static const bool limitrace = false; // This set to true will only learn mounts from chars on the same team, do what you want.
@@ -15,7 +23,7 @@ public:
         {
             Field* fields = result1->Fetch();
  
-            uint32 guid = fields[0].GetUInt32();
+            uint64 guid = fields[0].GetUInt64();
             uint32 race = fields[1].GetUInt8();
  
             if ((Player::TeamForRace(race) == Player::TeamForRace(pPlayer->getRace())) || !limitrace)

@@ -27,7 +27,7 @@ void AddCustomScripts()
 {
     AddSC_Transmogrification();
 	AddSC_GOMove_commandscript();
-	AddSC_LearnSpellsOnLevelUp();
-	AddSC_accontmounts();
-	AddSC_Reini_NPC();
+	LearnSpellsOnLevelUp();
+	AccountMounts();
+	Reini_NPC();
 }

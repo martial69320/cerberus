@@ -63,6 +63,7 @@
 #include "Unit.h"
 #include "VMapFactory.h"
 #include "WardenCheckMgr.h"
+/*Ajout du Store Manager.h*/
 #include "StoreManager.h"
 #include "WaypointMovementGenerator.h"
 #include "WeatherMgr.h"
@@ -1930,7 +1931,7 @@ void World::SetInitialWorldSettings()
         });
     }
     
-    
+    /*Ajout du chargement du script Store*/
     Maelstrom::sStoreMgr->LoadStore();
 
     uint32 startupDuration = GetMSTimeDiffToNow(startupBegin);

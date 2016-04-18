@@ -34,7 +34,7 @@ public:
 		return displayInitialMenu(player, creature);
 	}
 
-	bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 action)
+	bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
 	{
 
 		if (action == 0) {

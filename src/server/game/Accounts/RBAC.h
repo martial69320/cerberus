@@ -750,6 +750,13 @@ enum RBACPermissions
     RBAC_PERM_COMMAND_RELOAD_QUEST_GREETING                  = 843, // not on 3.3.5a
     RBAC_PERM_COMMAND_DEBUG_SEND_PLAYSCENE                   = 844, // not on 3.3.5a
     RBAC_PERM_COMMAND_GO_OFFSET                              = 845,
+	
+	//Arena Spectator
+	RBAC_PERM_COMMAND_SPECTATE								 = 1000,
+	RBAC_PERM_COMMAND_SPECTATE_PLAYER						 = 1001,
+	RBAC_PERM_COMMAND_SPECTATE_VIEW							 = 1002,
+	RBAC_PERM_COMMAND_SPECTATE_RESET						 = 1003,
+	RBAC_PERM_COMMAND_SPECTATE_LEAVE						 = 1004,
 
     // custom permissions 1000+
     RBAC_PERM_MAX

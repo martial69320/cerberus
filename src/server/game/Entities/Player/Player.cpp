@@ -522,6 +522,11 @@ Player::Player(WorldSession* session): Unit(true)
     m_MonthlyQuestChanged = false;
 
     m_SeasonalQuestChanged = false;
+	
+	// Arena Spectator
+	spectatorFlag = false;
+	spectateCanceled = false;
+	spectateFrom = NULL;
 
     SetPendingBind(0, 0);
 
@@ -2063,7 +2068,18 @@ bool Player::TeleportToBGEntryPoint()
     ScheduleDelayedOperation(DELAYED_BG_MOUNT_RESTORE);
     ScheduleDelayedOperation(DELAYED_BG_TAXI_RESTORE);
     ScheduleDelayedOperation(DELAYED_BG_GROUP_RESTORE);
-    return TeleportTo(m_bgData.joinPos);
+    //return TeleportTo(m_bgData.joinPos);
+
+	Battleground *oldBg = GetBattleground();
+	bool result = TeleportTo(m_bgData.joinPos);
+
+	if (IsSpectator() && result)
+	{
+		SetSpectate(false);
+		if (oldBg)
+			oldBg->RemoveSpectator(GetGUID());
+	}
+	return result;
 }
 
 void Player::ProcessDelayedOperations()
@@ -19435,6 +19451,7 @@ void Player::SaveToDB(bool create /*=false*/)
 	
     // save pet (hunter pet level and experience and all type pets health/mana).
     if (Pet* pet = GetPet())
+    
         pet->SavePetToDB(PET_SAVE_AS_CURRENT);
 }
 
@@ -24148,6 +24165,16 @@ void Player::SetViewpoint(WorldObject* target, bool apply)
 {
     if (apply)
     {
+		if (target->ToPlayer() == this)
+			return;
+
+		// Remove viewpoint if already have
+		if (IsSpectator() && spectateFrom)
+		{
+			SetViewpoint(spectateFrom, false);
+			spectateFrom = NULL;
+		}
+
         TC_LOG_DEBUG("maps", "Player::CreateViewpoint: Player '%s' (%s) creates seer (Entry: %u, TypeId: %u).",
             GetName().c_str(), GetGUID().ToString().c_str(), target->GetEntry(), target->GetTypeId());
 
@@ -26620,22 +26647,87 @@ void Player::RemoveRestFlag(RestFlag restFlag)
         RemoveFlag(PLAYER_FLAGS, PLAYER_FLAGS_RESTING);
     }
 }
-
-uint32 Player::DoRandomRoll(uint32 minimum, uint32 maximum)
+void Player::SetSelection(ObjectGuid guid)
 {
-    ASSERT(maximum <= 10000);
+	uint32 m_curSelection = guid;
+	SetUInt64Value(UNIT_FIELD_TARGET, guid);
+}
 
-    uint32 roll = urand(minimum, maximum);
+void Player::SetSpectate(bool on)
+{
+	if (on)
+	{
+		SetSpeed(MOVE_RUN, 5.0);
+		spectatorFlag = true;
 
-    WorldPacket data(MSG_RANDOM_ROLL, 4 + 4 + 4 + 8);
-    data << uint32(minimum);
-    data << uint32(maximum);
-    data << uint32(roll);
-    data << GetGUID();
-    if (Group* group = GetGroup())
-        group->BroadcastPacket(&data, false);
-    else
-        SendDirectMessage(&data);
+		m_ExtraFlags |= PLAYER_EXTRA_GM_ON;
+		setFaction(35);
 
-    return roll;
+		if (Pet* pet = GetPet())
+		{
+			RemovePet(pet, PET_SAVE_AS_CURRENT);
+		}
+		UnsummonPetTemporaryIfAny();
+
+		RemoveByteFlag(UNIT_FIELD_BYTES_2, 1, UNIT_BYTE2_FLAG_FFA_PVP);
+		ResetContestedPvP();
+
+		getHostileRefManager().setOnlineOfflineState(false);
+		CombatStopWithPets();
+
+		m_serverSideVisibility.SetValue(SERVERSIDE_VISIBILITY_GM, SEC_ADMINISTRATOR);
+	}
+	else
+	{
+		uint32 newPhase = 0;
+		AuraEffectList const& phases = GetAuraEffectsByType(SPELL_AURA_PHASE);
+		if (!phases.empty())
+			for (AuraEffectList::const_iterator itr = phases.begin(); itr != phases.end(); ++itr)
+				newPhase |= (*itr)->GetMiscValue();
+
+		if (!newPhase)
+			newPhase = PHASEMASK_NORMAL;
+
+		SetPhaseMask(newPhase, false);
+
+		m_ExtraFlags &= ~PLAYER_EXTRA_GM_ON;
+		setFactionForRace(getRace());
+		RemoveFlag(PLAYER_FLAGS, PLAYER_FLAGS_GM);
+		RemoveFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_ALLOW_CHEAT_SPELLS);
+
+		if (spectateFrom)
+			SetViewpoint(spectateFrom, false);
+
+		// restore FFA PvP Server state
+		if (sWorld->IsFFAPvPRealm())
+			SetByteFlag(UNIT_FIELD_BYTES_2, 1, UNIT_BYTE2_FLAG_FFA_PVP);
+
+		// restore FFA PvP area state, remove not allowed for GM mounts
+		UpdateArea(m_areaUpdateId);
+
+		getHostileRefManager().setOnlineOfflineState(true);
+		m_serverSideVisibility.SetValue(SERVERSIDE_VISIBILITY_GM, SEC_PLAYER);
+		spectateCanceled = false;
+		spectatorFlag = false;
+		RestoreDisplayId();
+		UpdateSpeed(MOVE_RUN, true);
+	}
+	UpdateObjectVisibility();
+}
+
+bool Player::HaveSpectators()
+{
+	if (IsSpectator())
+		return false;
+
+	if (Battleground *bg = GetBattleground())
+		if (bg->isArena())
+		{
+			if (bg->GetStatus() != STATUS_IN_PROGRESS)
+				return false;
+
+			return bg->HaveSpectators();
+		}
+
+	return false;
 }

@@ -2599,7 +2599,7 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         uint32 m_teleport_options;
         bool mSemaphoreTeleport_Near;
         bool mSemaphoreTeleport_Far;
-
+		
         uint32 m_DelayedOperations;
         bool m_bCanDelayTeleport;
         bool m_bHasDelayedTeleport;

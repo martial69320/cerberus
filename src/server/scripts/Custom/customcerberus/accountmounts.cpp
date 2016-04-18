@@ -1,59 +1,52 @@
-#include "DisableMgr.h"
-#include "Define.h"
-#include "GossipDef.h"
-#include "Item.h"
-#include "Player.h"
-#include "ScriptedGossip.h"
-#include "ScriptMgr.h"
-#include "Spell.h"
 class AccountMounts : public PlayerScript
 {
-    static const bool limitrace = false; // This set to true will only learn mounts from chars on the same team, do what you want.
+    static const bool limitrace = true; // This set to true will only learn mounts from chars on the same team, do what you want.
 public:
     AccountMounts() : PlayerScript("AccountMounts") { }
- 
-	void OnLogin(Player* pPlayer, bool firstLogin)
+
+    void OnLogin(Player* player, bool /*firstLogin*/) override
     {
         std::vector<uint32> Guids;
-        QueryResult result1 = CharacterDatabase.PQuery("SELECT guid, race FROM characters WHERE account = %u", pPlayer->GetSession()->GetAccountId());
+        uint32 playerGUID = player->GetGUID();
+        QueryResult result1 = CharacterDatabase.PQuery("SELECT guid, race FROM characters WHERE account = %u", playerGUID);
         if (!result1)
             return;
- 
+
         do 
         {
             Field* fields = result1->Fetch();
- 
-            uint64 guid = fields[0].GetUInt64();
+
+            uint32 guid = fields[0].GetUInt32();
             uint32 race = fields[1].GetUInt8();
- 
-            if ((Player::TeamForRace(race) == Player::TeamForRace(pPlayer->getRace())) || !limitrace)
+
+            if ((Player::TeamForRace(race) == Player::TeamForRace(player->getRace())) || !limitrace)
                 Guids.push_back(result1->Fetch()[0].GetUInt32());
- 
+
         } while (result1->NextRow());
- 
+
         std::vector<uint32> Spells;
- 
+
         for (auto& i : Guids)
         {
             QueryResult result2 = CharacterDatabase.PQuery("SELECT spell FROM character_spell WHERE guid = %u", i);
             if (!result2)
                 continue;
- 
+
             do
             {
                 Spells.push_back(result2->Fetch()[0].GetUInt32());
             } while (result2->NextRow());
         }
- 
+
         for (auto& i : Spells)
         {
             auto sSpell = sSpellStore.LookupEntry(i);
             if (sSpell->Effect[0] == SPELL_EFFECT_APPLY_AURA && sSpell->EffectApplyAuraName[0] == SPELL_AURA_MOUNTED)
-				pPlayer->LearnSpell(sSpell->Id, false);
+                player->LearnSpell(sSpell->Id, false);
         }
     }
 };
- 
+
 void AddSC_accontmounts()
 {
     new AccountMounts;

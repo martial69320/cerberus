@@ -19,6 +19,7 @@
 void AddSC_Transmogrification();
 void AddSC_GOMove_commandscript();
 void AddSC_LearnSpellsOnLevelUp();
+void AddSC_script_store();
 void AddSC_Reini_NPC();
 // The name of this function should match:
 // void Add${NameOfDirectory}Scripts()
@@ -27,5 +28,6 @@ void AddCustomScripts()
     AddSC_Transmogrification();
 	AddSC_GOMove_commandscript();
 	AddSC_LearnSpellsOnLevelUp();
+	AddSC_script_store();
 	AddSC_Reini_NPC();
 }

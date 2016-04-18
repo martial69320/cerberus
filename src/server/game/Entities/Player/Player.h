@@ -2266,6 +2266,12 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         void SetChampioningFaction(uint32 faction) { m_ChampioningFaction = faction; }
         Spell* m_spellModTakingSpell;
 
+		void SetCustomXpRate(uint32 rate) { m_CustomXpRate = rate; }
+        uint32 GetCustomXpRate() const { return m_CustomXpRate; }
+
+        void SetCustomLootRate(uint32 rate) { m_CustomLootRate = rate; }
+        uint32 GetCustomLootRate() const { return m_CustomLootRate; }
+		
         float GetAverageItemLevel() const;
         bool isDebugAreaTriggers;
 
@@ -2621,6 +2627,9 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         InstanceTimeMap _instanceResetTimes;
         uint32 _pendingBindId;
         uint32 _pendingBindTimer;
+		
+		uint32 m_CustomXpRate;
+        uint32 m_CustomLootRate;
 		
 		bool spectatorFlag;
 		bool spectateCanceled;

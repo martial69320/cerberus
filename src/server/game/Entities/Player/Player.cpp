@@ -555,6 +555,9 @@ Player::Player(WorldSession* session): Unit(true)
 
     m_achievementMgr = new AchievementMgr(this);
     m_reputationMgr = new ReputationMgr(this);
+	
+	m_CustomXpRate = 1;
+    m_CustomLootRate = 1;
 }
 
 Player::~Player()
@@ -6521,6 +6524,7 @@ void Player::CheckAreaExploreAndOutdoor()
                     XP = uint32(sObjectMgr->GetBaseXP(areaEntry->area_level)*sWorld->getRate(RATE_XP_EXPLORE));
                 }
 
+				XP *= GetCustomXpRate();
                 GiveXP(XP, nullptr);
                 SendExplorationExperience(areaId, XP);
             }
@@ -14979,7 +14983,7 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver, 
     bool rewarded = (m_RewardedQuests.find(quest_id) != m_RewardedQuests.end());
 
     // Not give XP in case already completed once repeatable quest
-    uint32 XP = rewarded && !quest->IsDFQuest() ? 0 : uint32(quest->XPValue(this)*sWorld->getRate(RATE_XP_QUEST));
+    uint32 XP = rewarded && !quest->IsDFQuest() ? 0 : uint32(quest->XPValue(this)*sWorld->getRate(RATE_XP_QUEST) * GetCustomXpRate());
 
     // handle SPELL_AURA_MOD_XP_QUEST_PCT auras
     Unit::AuraEffectList const& ModXPPctAuras = GetAuraEffectsByType(SPELL_AURA_MOD_XP_QUEST_PCT);

@@ -22,6 +22,15 @@ void CharacterDatabaseConnection::DoPrepareStatements()
     if (!m_reconnecting)
         m_stmts.resize(MAX_CHARACTERDATABASE_STATEMENTS);
 
+	
+	PrepareStatement(CHAR_INS_INDIVIDUAL_XP_RATE, "INSERT INTO character_xp_rate (guid, xp_rate) VALUES (?, ?)", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_DEL_INDIVIDUAL_XP_RATE, "DELETE FROM character_xp_rate WHERE guid = ?", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_SEL_INDIVIDUAL_XP_RATE, "SELECT xp_rate FROM character_xp_rate WHERE guid = ?", CONNECTION_SYNCH);
+    PrepareStatement(CHAR_UPD_INDIVIDUAL_XP_RATE, "UPDATE character_xp_rate SET xp_rate = ? WHERE guid = ?", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_INS_INDIVIDUAL_LOOT_RATE, "INSERT INTO character_loot_rate (guid, loot_rate) VALUES (?, ?)", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_DEL_INDIVIDUAL_LOOT_RATE, "DELETE FROM character_loot_rate WHERE guid = ?", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_SEL_INDIVIDUAL_LOOT_RATE, "SELECT loot_rate FROM character_loot_rate WHERE guid = ?", CONNECTION_SYNCH);
+    PrepareStatement(CHAR_UPD_INDIVIDUAL_LOOT_RATE, "UPDATE character_loot_rate SET loot_rate = ? WHERE guid = ?", CONNECTION_ASYNC);
     PrepareStatement(CHAR_DEL_QUEST_POOL_SAVE, "DELETE FROM pool_quest_save WHERE pool_id = ?", CONNECTION_ASYNC);
     PrepareStatement(CHAR_INS_QUEST_POOL_SAVE, "INSERT INTO pool_quest_save (pool_id, quest_id) VALUES (?, ?)", CONNECTION_ASYNC);
     PrepareStatement(CHAR_DEL_NONEXISTENT_GUILD_BANK_ITEM, "DELETE FROM guild_bank_item WHERE guildid = ? AND TabId = ? AND SlotId = ?", CONNECTION_ASYNC);

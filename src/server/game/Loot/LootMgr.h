@@ -141,7 +141,7 @@ struct TC_GAME_API LootStoreItem
         needs_quest(_needs_quest), groupid(_groupid), mincount(_mincount), maxcount(_maxcount)
          { }
 
-    bool Roll(bool rate) const;                             // Checks if the entry takes it's chance (at loot generation)
+    bool Roll(bool rate, uint32 customRate) const;                             // Checks if the entry takes it's chance (at loot generation)
     bool IsValid(LootStore const& store, uint32 entry) const;
                                                             // Checks correctness of values
 };
@@ -251,7 +251,7 @@ class TC_GAME_API LootTemplate
         // Adds an entry to the group (at loading stage)
         void AddEntry(LootStoreItem* item);
         // Rolls for every item in the template and adds the rolled items the the loot
-        void Process(Loot& loot, bool rate, uint16 lootMode, uint8 groupId = 0) const;
+        void Process(Loot& loot, bool rate, uint16 lootMode, uint8 groupId = 0, uint32 customRate = 1) const;
         void CopyConditions(const ConditionContainer& conditions);
         void CopyConditions(LootItem* li) const;
 

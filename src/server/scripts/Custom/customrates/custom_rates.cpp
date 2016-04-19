@@ -8,7 +8,7 @@ private:
 	static int32 GetRateFromDB(const Player *player, CharacterDatabaseStatements statement)
 	{
 		PreparedStatement *stmt = CharacterDatabase.GetPreparedStatement(statement);
-		stmt->setUInt32(0, player->GetGUID().GetCounter());
+		stmt->setUInt32(0, player->GetGUID();.GetCounter());
 		PreparedQueryResult result = CharacterDatabase.Query(stmt);
 
 		if (result)
@@ -23,13 +23,13 @@ private:
 		{
 			PreparedStatement *stmt = CharacterDatabase.GetPreparedStatement(uStmt);
 			stmt->setUInt32(0, rate);
-			stmt->setUInt32(1, player->GetGUID().GetCounter());
+			stmt->setUInt32(1, player->GetGUID();.GetCounter());
 			CharacterDatabase.Execute(stmt);
 		}
 		else
 		{
 			PreparedStatement *stmt = CharacterDatabase.GetPreparedStatement(iStmt);
-			stmt->setUInt32(0, player->GetGUID().GetCounter());
+			stmt->setUInt32(0, player->GetGUID();.GetCounter());
 			stmt->setUInt32(1, rate);
 			CharacterDatabase.Execute(stmt);
 		}
@@ -141,34 +141,34 @@ public:
                         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                         break;
 				case 2: //Exp x1
-				uint32 userGuid = player->GetGUID()
-						CharactersDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=1 WHERE GUID=%u", userGuid);
-						CharactersDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=1 WHERE GUID=%u", userGuid);
+				uint32 userGuid = player->GetGUID();
+						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=1 WHERE GUID=%u", userGuid);
+						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=1 WHERE GUID=%u", userGuid);
 						break;
 				case 3: //Exp x3
-				uint32 userGuid = player->GetGUID()
-						CharactersDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=3 WHERE GUID=%u", userGuid);
-						CharactersDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=3 WHERE GUID=%u", userGuid);
+				uint32 userGuid = player->GetGUID();
+						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=3 WHERE GUID=%u", userGuid);
+						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=3 WHERE GUID=%u", userGuid);
 						break;
 				case 4: //Exp x5
-				uint32 userGuid = player->GetGUID()
-						CharactersDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=5 WHERE GUID=%u", userGuid);
-						CharactersDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=5 WHERE GUID=%u", userGuid);
+				uint32 userGuid = player->GetGUID();
+						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=5 WHERE GUID=%u", userGuid);
+						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=5 WHERE GUID=%u", userGuid);
 						break;
 				case 5: //Exp x10
-				uint32 userGuid = player->GetGUID()
-						CharactersDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=10 WHERE GUID=%u", userGuid);
-						CharactersDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=10 WHERE GUID=%u", userGuid);
+				uint32 userGuid = player->GetGUID();
+						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=10 WHERE GUID=%u", userGuid);
+						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=10 WHERE GUID=%u", userGuid);
 						break;
 				case 6: //Exp x15
-				uint32 userGuid = player->GetGUID()
-						CharactersDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=15 WHERE GUID=%u", userGuid);
-						CharactersDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=15 WHERE GUID=%u", userGuid);
+				uint32 userGuid = player->GetGUID();
+						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=15 WHERE GUID=%u", userGuid);
+						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=15 WHERE GUID=%u", userGuid);
 						break;
 				case 7: //Exp x2
-				uint32 userGuid = player->GetGUID()
-						CharactersDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=2 WHERE GUID=%u", userGuid);
-						CharactersDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=2 WHERE GUID=%u", userGuid);
+				uint32 userGuid = player->GetGUID();
+						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=2 WHERE GUID=%u", userGuid);
+						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=2 WHERE GUID=%u", userGuid);
 						break;
                 }
                 return true;

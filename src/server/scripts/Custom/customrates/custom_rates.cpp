@@ -8,7 +8,7 @@ private:
     static int32 GetRateFromDB(const Player *player, CharacterDatabaseStatements statement)
     {
         PreparedStatement *stmt = CharacterDatabase.GetPreparedStatement(statement);
-        stmt->setUInt32(0, player->GetGUIDLow());
+        stmt->setUInt32(0, player->GetGUID());
         PreparedQueryResult result = CharacterDatabase.Query(stmt);
 
         if (result)
@@ -23,13 +23,13 @@ private:
         {
             PreparedStatement *stmt = CharacterDatabase.GetPreparedStatement(uStmt);
             stmt->setUInt32(0, rate);
-            stmt->setUInt32(1, player->GetGUIDLow());
+            stmt->setUInt32(1, player->GetGUID());
             CharacterDatabase.Execute(stmt);
         }
         else
         {
             PreparedStatement *stmt = CharacterDatabase.GetPreparedStatement(iStmt);
-            stmt->setUInt32(0, player->GetGUIDLow());
+            stmt->setUInt32(0, player->GetGUID());
             stmt->setUInt32(1, rate);
             CharacterDatabase.Execute(stmt);
         }

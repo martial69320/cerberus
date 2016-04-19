@@ -113,199 +113,66 @@ public:
 	}
 };
 
-class custom_rate_commands : public CommandScript
+class custom_rate_commands : public CreatureScript
 {
 private:
 	
 public:
-	custom_rate_commands() : CommandScript("custom_rate_commands")
-	{
-	}
+	custom_rate_commands() : CreatureScript("custom_rate_commands") { }
 
-	ChatCommand *GetCommands() const
-	{
-		static ChatCommand rateCommandTable[] =
-		{
-			{ "xp", SEC_PLAYER, false, &HandleRateXpCommand, "", NULL },
-			{ "loot", SEC_PLAYER, false, &HandleRateLootCommand, "", NULL },
-            { NULL, SEC_PLAYER, false, NULL, "", NULL }
-		};
-
-		static ChatCommand commandTable[] =
-		{
-			{ "rate", SEC_PLAYER, false, NULL, "", rateCommandTable },
-			{ NULL, SEC_PLAYER, false, NULL, "", NULL }
-		};
-
-		return commandTable;
-	}
-
-	static bool HandleRateXpCommand(ChatHandler *handler, const char *args)
-	{
-		// take a pointer to the player who uses the command
-		Player *me = handler->GetSession() ? handler->GetSession()->GetPlayer() : NULL;
-		if (!me)
-			return false;
-
-		// already at max level, no point in using the command at all
-		if (me->getLevel() == sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL))
-		{
-			handler->SendSysMessage("|CFF7BBEF7[Custom Rates]|r: You are already at maximum level.");
-			return true;
-		}
-
-		// no arguments, show current XP rate
-		if (!*args)
-		{
-			handler->PSendSysMessage("|CFF7BBEF7[Custom Rates]|r: Your current XP rate is %u.", me->GetCustomXpRate());
-			return true;
-		}
-
-		// first, check if I can use the command
-		if (me->GetSession()->GetSecurity() < (int)sWorld->getIntConfig(CONFIG_PLAYER_INDIVIDUAL_XP_RATE_SECURITY))
-		{
-			handler->SendSysMessage(LANG_YOURS_SECURITY_IS_LOW);
-            handler->SetSentErrorMessage(true);
-            return false;
-		}
-
-		// take a pointer to player's selection
-		Player *target = handler->getSelectedPlayer();
-		if (!target || !target->GetSession())
-		{
-            handler->SendSysMessage(LANG_NO_CHAR_SELECTED);
-            handler->SetSentErrorMessage(true);
-            return false;
+	bool OnGossipHello(Player *player, Creature *creature)
+        {
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Changer de rates", GOSSIP_SENDER_MAIN, 1);
+                player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                return true;
         }
-
-		// extract value
-		int rate = atoi((char *)args);
-		int maxRate = sWorld->getIntConfig(CONFIG_PLAYER_MAXIMUM_INDIVIDUAL_XP_RATE);
-		if (rate < 0 || rate > maxRate)
-		{
-			handler->PSendSysMessage("|CFF7BBEF7[Custom Rates]|r: Invalid rate specified, must be in interval [0,%i].", maxRate);
-			handler->SetSentErrorMessage(true);
-			return false;
-		}
-
-		// take a pointer to the player we need to set xp rate to
-		// can be either player itself, or his selection, if
-		// selection security is lower than his security
-		Player *player = NULL;
-		if (target == me)
-			player = me;
-		else
-		{
-			if (me->GetSession()->GetSecurity() > target->GetSession()->GetSecurity())
-				player = target;
-			else
-			{
-				handler->SendSysMessage(LANG_YOURS_SECURITY_IS_LOW);
-				handler->SetSentErrorMessage(true);
-				return false;
-			}
-		}
-
-		// set player custom XP rate and save it in DB for later use
-		uint32 uRate = static_cast<uint32>(rate);
-		player->SetCustomXpRate(uRate);
-		int32 rateFromDB = CustomRates::GetXpRateFromDB(player);
-		if (rateFromDB == -1)
-			CustomRates::SaveXpRateToDB(player, uRate, false);
-		else
-			CustomRates::SaveXpRateToDB(player, uRate, true);
-
-		// show a message indicating custom XP rate change
-		if (player == me)
-			handler->PSendSysMessage("|CFF7BBEF7[Custom Rates]|r: You have set your XP rate to %u.", uRate);
-		else
-		{
-			handler->PSendSysMessage("|CFF7BBEF7[Custom Rates]|r: You have set %s's XP rate to %u.", handler->GetNameLink(player).c_str(), uRate);
-			ChatHandler(player->GetSession()).PSendSysMessage("|CFF7BBEF7[Custom Rates]|r: %s has set your XP rate to %u.", handler->GetNameLink().c_str(), uRate);
-		}
-
-		return true;
-	}
-
-	static bool HandleRateLootCommand(ChatHandler *handler, const char *args)
-	{
-		// take a pointer to the player who uses the command
-		Player *me = handler->GetSession() ? handler->GetSession()->GetPlayer() : NULL;
-		if (!me)
-			return false;
-
-		// no arguments, show current loot rate
-		if (!*args)
-		{
-			handler->PSendSysMessage("|CFF7BBEF7[Custom Rates]|r: Your current loot rate is %u.", me->GetCustomLootRate());
-			return true;
-		}
-
-		// first, check if I can use the command
-		if (me->GetSession()->GetSecurity() < (int)sWorld->getIntConfig(CONFIG_PLAYER_INDIVIDUAL_LOOT_RATE_SECURITY))
-		{
-			handler->SendSysMessage(LANG_YOURS_SECURITY_IS_LOW);
-            handler->SetSentErrorMessage(true);
-            return false;
-		}
-
-		// take a pointer to player's selection
-		Player *target = handler->getSelectedPlayer();
-		if (!target || !target->GetSession())
-		{
-            handler->SendSysMessage(LANG_NO_CHAR_SELECTED);
-            handler->SetSentErrorMessage(true);
-            return false;
+        bool OnGossipSelect(Player *player, Creature *creature, uint32 /*sender*/, uint32 action)
+        {
+                player->PlayerTalkClass->ClearMenus();
+                switch(action)
+                {
+                case 1: // ...Back
+                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Passer en Rate x1", GOSSIP_SENDER_MAIN, 2);
+                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Passer en Rate x3", GOSSIP_SENDER_MAIN, 3);
+                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Passer en Rate x5", GOSSIP_SENDER_MAIN, 4);
+                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Passer en Rate x10", GOSSIP_SENDER_MAIN, 5);
+                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Passer en Rate x15", GOSSIP_SENDER_MAIN, 6);
+                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Passer en Rate de base", GOSSIP_SENDER_MAIN, 7);
+                        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                        break;
+				case 2: //Exp x1
+				uint32 userGuid = player->GetGUID()
+						CharactersDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=1 WHERE GUID=%u", userGuid);
+						CharactersDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=1 WHERE GUID=%u", userGuid);
+						break;
+				case 3: //Exp x3
+				uint32 userGuid = player->GetGUID()
+						CharactersDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=3 WHERE GUID=%u", userGuid);
+						CharactersDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=3 WHERE GUID=%u", userGuid);
+						break;
+				case 4: //Exp x5
+				uint32 userGuid = player->GetGUID()
+						CharactersDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=5 WHERE GUID=%u", userGuid);
+						CharactersDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=5 WHERE GUID=%u", userGuid);
+						break;
+				case 5: //Exp x10
+				uint32 userGuid = player->GetGUID()
+						CharactersDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=10 WHERE GUID=%u", userGuid);
+						CharactersDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=10 WHERE GUID=%u", userGuid);
+						break;
+				case 6: //Exp x15
+				uint32 userGuid = player->GetGUID()
+						CharactersDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=15 WHERE GUID=%u", userGuid);
+						CharactersDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=15 WHERE GUID=%u", userGuid);
+						break;
+				case 7: //Exp x2
+				uint32 userGuid = player->GetGUID()
+						CharactersDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=2 WHERE GUID=%u", userGuid);
+						CharactersDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=2 WHERE GUID=%u", userGuid);
+						break;
+                }
+                return true;
         }
-
-		// extract value
-		int rate = atoi((char *)args);
-		int maxRate = sWorld->getIntConfig(CONFIG_PLAYER_MAXIMUM_INDIVIDUAL_LOOT_RATE);
-		if (rate < 0 || rate > maxRate)
-		{
-			handler->PSendSysMessage("|CFF7BBEF7[Custom Rates]|r: Invalid rate specified, must be in interval [0,%i].", maxRate);
-			handler->SetSentErrorMessage(true);
-			return false;
-		}
-
-		// take a pointer to the player we need to set xp rate to
-		// can be either player itself, or his selection, if
-		// selection security is lower than his security
-		Player *player = NULL;
-		if (target == me)
-			player = me;
-		else
-		{
-			if (me->GetSession()->GetSecurity() > target->GetSession()->GetSecurity())
-				player = target;
-			else
-			{
-				handler->SendSysMessage(LANG_YOURS_SECURITY_IS_LOW);
-				handler->SetSentErrorMessage(true);
-				return false;
-			}
-		}
-
-		// set player custom loot rate and save it in DB for later use
-		uint32 uRate = static_cast<uint32>(rate);
-		player->SetCustomLootRate(uRate);
-		int32 rateFromDB = CustomRates::GetLootRateFromDB(player);
-		if (rateFromDB == -1)
-			CustomRates::SaveLootRateToDB(player, uRate, false);
-		else
-			CustomRates::SaveLootRateToDB(player, uRate, true);
-
-		// show a message indicating custom XP rate change
-		if (player == me)
-			handler->PSendSysMessage("|CFF7BBEF7[Custom Rates]|r: You have set your loot rate to %u.", uRate);
-		else
-		{
-			handler->PSendSysMessage("|CFF7BBEF7[Custom Rates]|r: You have set %s's loot rate to %u.", handler->GetNameLink(player).c_str(), uRate);
-			ChatHandler(player->GetSession()).PSendSysMessage("|CFF7BBEF7[Custom Rates]|r: %s has set your loot rate to %u.", handler->GetNameLink().c_str(), uRate);
-		}
-
-		return true;
-	}
 };
 
 void Add_SC_Custom_Rates()

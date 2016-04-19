@@ -12,7 +12,7 @@ public:
  
         bool OnGossipHello(Player *player, Creature *creature)
         {
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Reset Instances", GOSSIP_SENDER_MAIN, 2);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Reset Instances", GOSSIP_SENDER_MAIN, 73);
                 player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 return true;
         }

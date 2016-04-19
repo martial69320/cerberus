@@ -122,16 +122,16 @@ public:
     {
         static std::vector<ChatCommand> rateCommandTable =
         {
-            { "xp", SEC_PLAYER, false, &HandleRateXpCommand, "", NULL },
-            { "loot", SEC_PLAYER, false, &HandleRateLootCommand, "", NULL },
+            { "xp", rbac::RBAC_PERM_COMMAND_XP_RATE, false, &HandleRateXpCommand, "", NULL },
+            { "loot", rbac::RBAC_PERM_COMMAND_LOOT_RATE, false, &HandleRateLootCommand, "", NULL },
 
-            { NULL, SEC_PLAYER, false, NULL, "", NULL }
+            { NULL, rbac::RBAC_PERM_COMMAND_XP_RATE, false, NULL, "", NULL }
         };
 
         static std::vector<ChatCommand> commandTable =
         {
-            { "rate", SEC_PLAYER, false, NULL, "", rateCommandTable },
-            { NULL, SEC_PLAYER, false, NULL, "", NULL }
+            { "rate", rbac::RBAC_PERM_COMMAND_RATE, false, NULL, "", rateCommandTable },
+            { NULL, rbac::RBAC_PERM_COMMAND_XP_RATE, false, NULL, "", NULL }
         };
 
         return commandTable;

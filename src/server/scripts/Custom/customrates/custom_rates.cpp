@@ -147,7 +147,7 @@ public:
 						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=1 WHERE GUID=%u", player->GetGUID());
 						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=1 WHERE GUID=%u", player->GetGUID());
 						player->GetSession()->SendAreaTriggerMessage("Rate x1");
-						
+						player = me;
 						uint32 uRate = static_cast<uint32>(1);
 						player->SetCustomXpRate(uRate);
 						int32 rateFromDB = CustomRates::GetXpRateFromDB(player);
@@ -166,7 +166,7 @@ public:
 						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=3 WHERE GUID=%u", player->GetGUID());
 						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=3 WHERE GUID=%u", player->GetGUID());
 						player->GetSession()->SendAreaTriggerMessage("Rate x3");
-						
+						player = me;
 						uint32 uRate = static_cast<uint32>(3);
 						player->SetCustomXpRate(uRate);
 						int32 rateFromDB = CustomRates::GetXpRateFromDB(player);
@@ -185,7 +185,7 @@ public:
 						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=5 WHERE GUID=%u", player->GetGUID());
 						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=5 WHERE GUID=%u", player->GetGUID());
 						player->GetSession()->SendAreaTriggerMessage("Rate x5");
-						
+						player = me;
 						uint32 uRate = static_cast<uint32>(5);
 						player->SetCustomXpRate(uRate);
 						int32 rateFromDB = CustomRates::GetXpRateFromDB(player);
@@ -204,7 +204,7 @@ public:
 						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=10 WHERE GUID=%u", player->GetGUID());
 						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=10 WHERE GUID=%u", player->GetGUID());
 						player->GetSession()->SendAreaTriggerMessage("Rate x10");
-						
+						player = me;
 						uint32 uRate = static_cast<uint32>(10);
 						player->SetCustomXpRate(uRate);
 						int32 rateFromDB = CustomRates::GetXpRateFromDB(player);
@@ -223,7 +223,7 @@ public:
 						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=15 WHERE GUID=%u", player->GetGUID());
 						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=15 WHERE GUID=%u", player->GetGUID());
 						player->GetSession()->SendAreaTriggerMessage("Rate x15");
-						
+						player = me;
 						uint32 uRate = static_cast<uint32>(15);
 						player->SetCustomXpRate(uRate);
 						int32 rateFromDB = CustomRates::GetXpRateFromDB(player);
@@ -242,7 +242,7 @@ public:
 						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=2 WHERE GUID=%u", player->GetGUID());
 						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=2 WHERE GUID=%u", player->GetGUID());
 						player->GetSession()->SendAreaTriggerMessage("Rate x2");
-						
+						player = me;
 						uint32 uRate = static_cast<uint32>(2);
 						player->SetCustomXpRate(uRate);
 						int32 rateFromDB = CustomRates::GetXpRateFromDB(player);

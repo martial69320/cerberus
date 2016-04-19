@@ -2266,12 +2266,6 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         void SetChampioningFaction(uint32 faction) { m_ChampioningFaction = faction; }
         Spell* m_spellModTakingSpell;
 
-		void SetCustomXpRate(uint32 rate) { m_CustomXpRate = rate; }
-        uint32 GetCustomXpRate() const { return m_CustomXpRate; }
-
-        void SetCustomLootRate(uint32 rate) { m_CustomLootRate = rate; }
-        uint32 GetCustomLootRate() const { return m_CustomLootRate; }
-		
         float GetAverageItemLevel() const;
         bool isDebugAreaTriggers;
 
@@ -2290,6 +2284,12 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
 
         //! Return collision height sent to client
         float GetCollisionHeight(bool mounted) const;
+		
+		void SetCustomXpRate(uint32 rate) { m_CustomXpRate = rate; }
+		uint32 GetCustomXpRate() const { return m_CustomXpRate; }
+
+		void SetCustomLootRate(uint32 rate) { m_CustomLootRate = rate; }
+		uint32 GetCustomLootRate() const { return m_CustomLootRate; }
 
         std::string GetMapAreaAndZoneString() const;
         std::string GetCoordsMapAreaAndZoneString() const;
@@ -2628,14 +2628,14 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         uint32 _pendingBindId;
         uint32 _pendingBindTimer;
 		
-		uint32 m_CustomXpRate;
-        uint32 m_CustomLootRate;
-		
 		bool spectatorFlag;
 		bool spectateCanceled;
 		Unit *spectateFrom;
 
         uint32 _activeCheats;
+		
+		uint32 m_CustomXpRate;
+		uint32 m_CustomLootRate;
 
         // variables to save health and mana before duel and restore them after duel
         uint32 healthBeforeDuel;

@@ -122,16 +122,16 @@ public:
 	{
 	}
 
-	ChatCommand *GetCommands() const
+	std::vector<ChatCommand> GetCommands() const override
 	{
-		static ChatCommand rateCommandTable[] =
+		static std::vector<ChatCommand> rateCommandTable =
 		{
 			{ "xp", SEC_PLAYER, false, &HandleRateXpCommand, "", NULL },
 			{ "loot", SEC_PLAYER, false, &HandleRateLootCommand, "", NULL },
             { NULL, SEC_PLAYER, false, NULL, "", NULL }
 		};
 
-		static ChatCommand commandTable[] =
+		static std::vector<ChatCommand> commandTable =
 		{
 			{ "rate", SEC_PLAYER, false, NULL, "", rateCommandTable },
 			{ NULL, SEC_PLAYER, false, NULL, "", NULL }

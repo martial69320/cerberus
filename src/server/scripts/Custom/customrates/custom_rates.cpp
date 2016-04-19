@@ -118,9 +118,9 @@ private:
 public:
     custom_rate_commands() : CommandScript("custom_rate_commands") {}
 
-    ChatCommand *GetCommands() const
+    std::vector<ChatCommand> GetCommands() const override
     {
-        static ChatCommand rateCommandTable[] =
+        static std::vector<ChatCommand> rateCommandTable =
         {
             { "xp", rbac::RBAC_PERM_COMMAND_XP_RATE, false, &HandleRateXpCommand, "", NULL },
             { "loot", rbac::RBAC_PERM_COMMAND_LOOT_RATE, false, &HandleRateLootCommand, "", NULL },

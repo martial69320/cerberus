@@ -15,8 +15,6 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (25596, 0, 6, 7, 61, 0, 100, 0, 0, 0, 0, 0, 45, 0, 1, 0, 0, 0, 0, 19, 25607, 20, 0, 0, 0, 0, 0, 'Infected Kodo Beast - On Target Spell Hit \'Deliver Kodo\' - Set data'),
 (25596, 0, 7, 0, 61, 0, 100, 0, 0, 0, 0, 0, 41, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Infected Kodo Beast - On Target Spell Hit \'Deliver Kodo\' - Despawn Instant'),
 (25607, 0, 0, 0, 38, 0, 100, 0, 0, 1, 3000, 3000, 80, 2560700, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Farmer Torp - In Data set - Action list'),
-(2560700, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 84, 0, 0, 0, 0, 0, 0, 21, 20, 0, 0, 0, 0, 0, 0, 'Farmer Torp - Action list - Player talk'),
-(2560700, 9, 1, 0, 0, 0, 100, 0, 3000, 3000, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Farmer Torp - Action list - Say text');
 
 DELETE FROM `creature_text` WHERE `entry` IN (25607, 25596);
 INSERT INTO `creature_text` (`entry`,`groupid`,`id`,`text`,`type`,`probability`,`BroadcastTextId`,`TextRange`,`comment`) VALUES

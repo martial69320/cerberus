@@ -13,6 +13,7 @@ public:
         bool OnGossipHello(Player *player, Creature *creature)
         {
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Reset Instances", GOSSIP_SENDER_MAIN, 73);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Au revoir", GOSSIP_SENDER_MAIN, 74);
                 player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 return true;
         }
@@ -36,6 +37,10 @@ public:
                 case 73: // ...Back
                         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Supprimer vos ID d'Instances", GOSSIP_SENDER_MAIN, 2);
                         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                        break;
+				case 74: // ...Back
+                        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+						player->CLOSE_GOSSIP_MENU();
                         break;
                 }
                 return true;

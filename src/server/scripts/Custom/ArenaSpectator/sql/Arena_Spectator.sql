@@ -1,7 +1,7 @@
 SET
 @Entry = 190000,
-@Name = "Arena Spectator",
-@Subname = "Spectate Master",
+@Name = "Gromy",
+@Subname = "Spectateur d'arene",
 @IconName = "Speak";
 
 DELETE FROM `creature_template` WHERE `entry`=@Entry;

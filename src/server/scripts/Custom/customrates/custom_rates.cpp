@@ -140,121 +140,42 @@ public:
                         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Passer en Rate de base", GOSSIP_SENDER_MAIN, 7);
 						CharacterDatabase.PExecute("INSERT IGNORE INTO character_loot_rate (xp_rate, GUID) VALUES (1, %u)", player->GetGUID());
 						CharacterDatabase.PExecute("INSERT IGNORE INTO character_xp_rate (xp_rate, GUID) VALUES (1, %u)", player->GetGUID());
-						player = me;
                         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                         break;
 				case 2: //Exp x1
 						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=1 WHERE GUID=%u", player->GetGUID());
 						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=1 WHERE GUID=%u", player->GetGUID());
 						player->GetSession()->SendAreaTriggerMessage("Rate x1");
-						player = me;
-						uint32 uRate = static_cast<uint32>(1);
-						player->SetCustomXpRate(uRate);
-						int32 rateFromDB = CustomRates::GetXpRateFromDB(player);
-						if (rateFromDB == -1)
-						CustomRates::SaveXpRateToDB(player, uRate, false);
-						else
-						CustomRates::SaveXpRateToDB(player, uRate, true);
-
-						// show a message indicating custom XP rate change
-						if (player == me)
-						handler->PSendSysMessage("|CFF7BBEF7[Custom Rates]|r: You have set your XP rate to %u.", uRate);
-					
                         player->CLOSE_GOSSIP_MENU();
 						break;
 				case 3: //Exp x3
 						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=3 WHERE GUID=%u", player->GetGUID());
 						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=3 WHERE GUID=%u", player->GetGUID());
 						player->GetSession()->SendAreaTriggerMessage("Rate x3");
-						player = me;
-						uint32 uRate = static_cast<uint32>(3);
-						player->SetCustomXpRate(uRate);
-						int32 rateFromDB = CustomRates::GetXpRateFromDB(player);
-						if (rateFromDB == -1)
-						CustomRates::SaveXpRateToDB(player, uRate, false);
-						else
-						CustomRates::SaveXpRateToDB(player, uRate, true);
-
-						// show a message indicating custom XP rate change
-						if (player == me)
-						handler->PSendSysMessage("|CFF7BBEF7[Custom Rates]|r: You have set your XP rate to %u.", uRate);
-					
                         player->CLOSE_GOSSIP_MENU();
 						break;
 				case 4: //Exp x5
 						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=5 WHERE GUID=%u", player->GetGUID());
 						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=5 WHERE GUID=%u", player->GetGUID());
 						player->GetSession()->SendAreaTriggerMessage("Rate x5");
-						player = me;
-						uint32 uRate = static_cast<uint32>(5);
-						player->SetCustomXpRate(uRate);
-						int32 rateFromDB = CustomRates::GetXpRateFromDB(player);
-						if (rateFromDB == -1)
-						CustomRates::SaveXpRateToDB(player, uRate, false);
-						else
-						CustomRates::SaveXpRateToDB(player, uRate, true);
-
-						// show a message indicating custom XP rate change
-						if (player == me)
-						handler->PSendSysMessage("|CFF7BBEF7[Custom Rates]|r: You have set your XP rate to %u.", uRate);
-					
                         player->CLOSE_GOSSIP_MENU();
 						break;
 				case 5: //Exp x10
 						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=10 WHERE GUID=%u", player->GetGUID());
 						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=10 WHERE GUID=%u", player->GetGUID());
 						player->GetSession()->SendAreaTriggerMessage("Rate x10");
-						player = me;
-						uint32 uRate = static_cast<uint32>(10);
-						player->SetCustomXpRate(uRate);
-						int32 rateFromDB = CustomRates::GetXpRateFromDB(player);
-						if (rateFromDB == -1)
-						CustomRates::SaveXpRateToDB(player, uRate, false);
-						else
-						CustomRates::SaveXpRateToDB(player, uRate, true);
-
-						// show a message indicating custom XP rate change
-						if (player == me)
-						handler->PSendSysMessage("|CFF7BBEF7[Custom Rates]|r: You have set your XP rate to %u.", uRate);
-					
                         player->CLOSE_GOSSIP_MENU();
 						break;
 				case 6: //Exp x15
 						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=15 WHERE GUID=%u", player->GetGUID());
 						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=15 WHERE GUID=%u", player->GetGUID());
 						player->GetSession()->SendAreaTriggerMessage("Rate x15");
-						player = me;
-						uint32 uRate = static_cast<uint32>(15);
-						player->SetCustomXpRate(uRate);
-						int32 rateFromDB = CustomRates::GetXpRateFromDB(player);
-						if (rateFromDB == -1)
-						CustomRates::SaveXpRateToDB(player, uRate, false);
-						else
-						CustomRates::SaveXpRateToDB(player, uRate, true);
-
-						// show a message indicating custom XP rate change
-						if (player == me)
-						handler->PSendSysMessage("|CFF7BBEF7[Custom Rates]|r: You have set your XP rate to %u.", uRate);
-					
                         player->CLOSE_GOSSIP_MENU();
 						break;
 				case 7: //Exp x2
 						CharacterDatabase.PExecute("UPDATE character_loot_rate SET loot_rate=2 WHERE GUID=%u", player->GetGUID());
 						CharacterDatabase.PExecute("UPDATE character_xp_rate SET xp_rate=2 WHERE GUID=%u", player->GetGUID());
 						player->GetSession()->SendAreaTriggerMessage("Rate x2");
-						player = me;
-						uint32 uRate = static_cast<uint32>(2);
-						player->SetCustomXpRate(uRate);
-						int32 rateFromDB = CustomRates::GetXpRateFromDB(player);
-						if (rateFromDB == -1)
-						CustomRates::SaveXpRateToDB(player, uRate, false);
-						else
-						CustomRates::SaveXpRateToDB(player, uRate, true);
-
-						// show a message indicating custom XP rate change
-						if (player == me)
-						handler->PSendSysMessage("|CFF7BBEF7[Custom Rates]|r: You have set your XP rate to %u.", uRate);
-					
                         player->CLOSE_GOSSIP_MENU();
 						break;
                 }

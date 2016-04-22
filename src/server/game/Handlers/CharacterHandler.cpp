@@ -980,7 +980,7 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
             //sLog->outErrorDb("SHIT!@ %u", pCurrChar->GetGUIDLow());
             nameUpdate_AT_LOGIN_UPDATE_NAME = (*result)[0].GetString();
             sWorld->UpdateCharacterInfo(pCurrChar->GetGUID(), nameUpdate_AT_LOGIN_UPDATE_NAME);
-            sWorld->AddCharacterInfo(pCurrChar->GetGUID(), nameUpdate_AT_LOGIN_UPDATE_NAME, pCurrChar->AccountId, pCurrChar->getGender(), pCurrChar->getRace(), pCurrChar->getClass(), pCurrChar->getLevel());
+            sWorld->AddCharacterInfo(pCurrChar->GetGUID(), nameUpdate_AT_LOGIN_UPDATE_NAME, AccountId, pCurrChar->getGender(), pCurrChar->getRace(), pCurrChar->getClass(), pCurrChar->getLevel());
         }
 //        if(!sWorld->UpdateCharacterNameData(pCurrChar->GetGUIDLow(), pCurrChar->GetName(), pCurrChar->getGender(), pCurrChar->getRace()))
 //           sWorld->AddCharacterNameData(pCurrChar->GetGUIDLow(), pCurrChar->GetName(), pCurrChar->getGender(), pCurrChar->getRace(), pCurrChar->getClass());

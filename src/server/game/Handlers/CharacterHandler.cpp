@@ -974,13 +974,13 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
     {
 //        sWorld->UpdateCharacterNameData(pCurrChar->GetGUIDLow() );
         std::string nameUpdate_AT_LOGIN_UPDATE_NAME;
-        QueryResult result = CharacterDatabase.PQuery("SELECT name FROM characters WHERE `guid` = '%u'", pCurrChar->GetGUIDLow());
+        QueryResult result = CharacterDatabase.PQuery("SELECT name FROM characters WHERE `guid` = '%u'", pCurrChar->GetGUID());
         if(result)
         {
             //sLog->outErrorDb("SHIT!@ %u", pCurrChar->GetGUIDLow());
             nameUpdate_AT_LOGIN_UPDATE_NAME = (*result)[0].GetString();
-            sWorld->UpdateCharacterNameData(pCurrChar->GetGUIDLow(), nameUpdate_AT_LOGIN_UPDATE_NAME);
-            sWorld->AddCharacterNameData(pCurrChar->GetGUIDLow(), nameUpdate_AT_LOGIN_UPDATE_NAME, pCurrChar->getGender(), pCurrChar->getRace(), pCurrChar->getClass(), pCurrChar->getLevel());
+            sWorld->UpdateCharacterNameData(pCurrChar->GetGUID(), nameUpdate_AT_LOGIN_UPDATE_NAME);
+            sWorld->AddCharacterNameData(pCurrChar->GetGUID(), nameUpdate_AT_LOGIN_UPDATE_NAME, pCurrChar->getGender(), pCurrChar->getRace(), pCurrChar->getClass(), pCurrChar->getLevel());
         }
 //        if(!sWorld->UpdateCharacterNameData(pCurrChar->GetGUIDLow(), pCurrChar->GetName(), pCurrChar->getGender(), pCurrChar->getRace()))
 //           sWorld->AddCharacterNameData(pCurrChar->GetGUIDLow(), pCurrChar->GetName(), pCurrChar->getGender(), pCurrChar->getRace(), pCurrChar->getClass());

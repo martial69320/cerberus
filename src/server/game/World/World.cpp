@@ -3360,11 +3360,11 @@ void World::AddCharacterInfo(ObjectGuid const& guid, uint32 accountId, std::stri
     data.Level = level;
 }
 
-void World::UpdateCharacterInfo(ObjectGuid const& guid, std::string const& name, uint8 gender /*= GENDER_NONE*/, uint8 race /*= RACE_NONE*/)
+bool World::UpdateCharacterInfo(ObjectGuid const& guid, std::string const& name, uint8 gender /*= GENDER_NONE*/, uint8 race /*= RACE_NONE*/)
 {
     CharacterInfoContainer::iterator itr = _characterInfoStore.find(guid);
     if (itr == _characterInfoStore.end())
-        return;
+        return false;
 
     itr->second.Name = name;
 
@@ -3373,6 +3373,7 @@ void World::UpdateCharacterInfo(ObjectGuid const& guid, std::string const& name,
 
     if (race != RACE_NONE)
         itr->second.Race = race;
+	return true;
 
     WorldPacket data(SMSG_INVALIDATE_PLAYER, 8);
     data << guid;

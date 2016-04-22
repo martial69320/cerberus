@@ -54,7 +54,7 @@ namespace
         {
             WorldSession* session = player->GetSession();
             if (sTransmogrification->EnableTransmogInfo)
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_HOW_WORK_BASE, EQUIPMENT_SLOT_END + 9, 0);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tComment fonctionne la\ntransmogrification", EQUIPMENT_SLOT_END + 9, 0);
             for (uint8 slot = EQUIPMENT_SLOT_START; slot < EQUIPMENT_SLOT_END; ++slot)
             {
                 if (const char* slotName = sTransmogrification->GetSlotName(slot, session))
@@ -67,10 +67,10 @@ namespace
             }
 #ifdef PRESETS
             if (sTransmogrification->EnableSets)
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_MANAGE_SETS, EQUIPMENT_SLOT_END + 4, 0);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/RAIDFRAME/UI-RAIDFRAME-MAINASSIST:30:30:-18:0|tGerer les sets", EQUIPMENT_SLOT_END + 4, 0);
 #endif
-            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_REMOVE_ALL, EQUIPMENT_SLOT_END + 2, 0, LANG_TRANSMO_REMOVE_ALL_VERIFY, 0, false);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_REFRESH_MENU, EQUIPMENT_SLOT_END + 1, 0);
+            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Enchant_Disenchant:30:30:-18:0|tRetirer toutes les\ntransmogrifications", EQUIPMENT_SLOT_END + 2, 0, "Remove transmogrifications from all equipped items?", 0, false);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tRafraichir le menu", EQUIPMENT_SLOT_END + 1, 0);
             player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
             return true;
         }
@@ -129,7 +129,7 @@ namespace
                         return true;
                     }
                     if (sTransmogrification->EnableSetInfo)
-                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_HOW_WORK_SETS, EQUIPMENT_SLOT_END + 10, 0);
+                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tComment fonctionnent les sets", EQUIPMENT_SLOT_END + 10, 0);
 
                     if (!player->presetMap.empty())
                     {
@@ -137,11 +137,11 @@ namespace
                             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Misc_Statue_02:30:30:-18:0|t" + it->second.name, EQUIPMENT_SLOT_END + 6, it->first);
 
                         if (player->presetMap.size() < sTransmogrification->MaxSets)
-                            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_SAVE_SET, EQUIPMENT_SLOT_END + 8, 0);
+                            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/GuildBankFrame/UI-GuildBankFrame-NewTab:30:30:-18:0|tEnregistrer le set", EQUIPMENT_SLOT_END + 8, 0);
                     }
                     else
-                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_SAVE_SET, EQUIPMENT_SLOT_END + 8, 0);
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_RETOUR, EQUIPMENT_SLOT_END + 1, 0);
+                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/GuildBankFrame/UI-GuildBankFrame-NewTab:30:30:-18:0|tEnregistrer le set", EQUIPMENT_SLOT_END + 8, 0);
+                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tRetour..", EQUIPMENT_SLOT_END + 1, 0);
                     player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 } break;
                 case EQUIPMENT_SLOT_END + 5: // Use preset
@@ -181,9 +181,9 @@ namespace
                     for (PresetslotMapType::const_iterator it2 = it->second.slotMap.begin(); it2 != it->second.slotMap.end(); ++it2)
                         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, sTransmogrification->GetItemIcon(it2->second, 30, 30, -18, 0) + sTransmogrification->GetItemLink(it2->second, session), sender, action);
 
-                    player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_USE_SET, EQUIPMENT_SLOT_END + 5, action, "" + it->second.name, 0, false);
-                    player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_DELETE_SET, EQUIPMENT_SLOT_END + 7, action, LANG_TRANSMO_DELETE_SET_VERIFY + it->second.name, 0, false);
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_RETOUR, EQUIPMENT_SLOT_END + 4, 0);
+                    player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Misc_Statue_02:30:30:-18:0|tUtiliser le set", EQUIPMENT_SLOT_END + 5, action, "En utilisant ce set de transmogrification, vous rendrez inechangeable tout les objets modifiés.\nVoulez-vous continuer?\n\n" + it->second.name, 0, false);
+                    player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-LeaveItem-Opaque:30:30:-18:0|tSupprimer le set", EQUIPMENT_SLOT_END + 7, action, "Êtes vous sur de vouloir supprimer le set " + it->second.name + "?", 0, false);
+                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tRetour..", EQUIPMENT_SLOT_END + 4, 0);
                     player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 } break;
                 case EQUIPMENT_SLOT_END + 7: // Delete preset
@@ -235,20 +235,20 @@ namespace
                         }
                     }
                     if (canSave)
-                        player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_SAVE_SET, 0, 0, LANG_TRANSMO_INSERT_NAME, cost*sTransmogrification->SetCostModifier + sTransmogrification->SetCopperCost, true);
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_REFRESH_MENU, sender, action);
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_RETOUR, EQUIPMENT_SLOT_END + 4, 0);
+                        player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/GuildBankFrame/UI-GuildBankFrame-NewTab:30:30:-18:0|tEnregistrer le Set", 0, 0, "Insérez un nom", cost*sTransmogrification->SetCostModifier + sTransmogrification->SetCopperCost, true);
+                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tRafraichir le menu", sender, action);
+                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tRetour..", EQUIPMENT_SLOT_END + 4, 0);
                     player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 } break;
                 case EQUIPMENT_SLOT_END + 10: // Set info
                 {
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_RETOUR, EQUIPMENT_SLOT_END + 4, 0);
+                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tRetour..", EQUIPMENT_SLOT_END + 4, 0);
                     player->SEND_GOSSIP_MENU(sTransmogrification->SetNpcText, creature->GetGUID());
                 } break;
 #endif
                 case EQUIPMENT_SLOT_END + 9: // Transmog info
                 {
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_RETOUR, EQUIPMENT_SLOT_END + 1, 0);
+                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tRetour..", EQUIPMENT_SLOT_END + 1, 0);
                     player->SEND_GOSSIP_MENU(sTransmogrification->TransmogNpcText, creature->GetGUID());
                 } break;
                 default: // Transmogrify
@@ -407,9 +407,9 @@ namespace
                 }
             }
 
-            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_REMOVE_SLOT, EQUIPMENT_SLOT_END + 3, slot, LANG_TRANSMO_REMOVE_SLOT_VERIFY, 0, false);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_REFRESH_MENU, EQUIPMENT_SLOT_END, slot);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, LANG_TRANSMO_RETOUR, EQUIPMENT_SLOT_END + 1, 0);
+            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Enchant_Disenchant:30:30:-18:0|tRetirer la transmogrification", EQUIPMENT_SLOT_END + 3, slot, "Retirer la transmogrification du slot ?", 0, false);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tRafraichir", EQUIPMENT_SLOT_END, slot);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tRetour..", EQUIPMENT_SLOT_END + 1, 0);
             player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         }
     };

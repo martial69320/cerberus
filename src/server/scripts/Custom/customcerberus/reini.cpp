@@ -35,7 +35,7 @@ public:
                         player->CLOSE_GOSSIP_MENU();
                         break;
                 case 73: // ...Back
-                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, LANG_REINI_INSTANCE, GOSSIP_SENDER_MAIN, 2);
+                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Reinitialiser les instances", GOSSIP_SENDER_MAIN, 2);
                         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                         break;
 				case 74: // ...Back

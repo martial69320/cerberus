@@ -17,7 +17,7 @@ public:
 
 		//On récupère les points boutiques du joueur et on les affiche
 		uint32 coins = Maelstrom::sStoreMgr->GetAccountCoins(player->GetSession()->GetAccountId());
-		std::string msg = "You have " + std::to_string(coins) + " store coins";
+		std::string msg = "Vous avez " + std::to_string(coins) + " points\n\n";
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, msg.c_str(), GOSSIP_SENDER_MAIN, 0);
 
 		//On récupère la liste des catégories
@@ -53,7 +53,7 @@ public:
 			Maelstrom::StoreManager::PurchaseResult purchaseResult = Maelstrom::sStoreMgr->PurchaseItem(player, itemEntryToBuy);
 			switch (purchaseResult) {
 			case Maelstrom::StoreManager::PURCHASE_RESULT_ERROR: {
-				player->GetSession()->SendAreaTriggerMessage("An error occured");
+				player->GetSession()->SendAreaTriggerMessage("Une erreure est survenue");
 				player->PlayerTalkClass->ClearMenus();
 				player->CLOSE_GOSSIP_MENU();
 				return false;
@@ -61,7 +61,7 @@ public:
 			break;
 
 			case Maelstrom::StoreManager::PURCHASE_RESULT_NOT_ENOUGH_COINS: {
-				player->GetSession()->SendAreaTriggerMessage("You don't have enough coins to purchase this item");
+				player->GetSession()->SendAreaTriggerMessage("Vous n'avez pas assez de points pour acheter cet objet.");
 				player->PlayerTalkClass->ClearMenus();
 				player->CLOSE_GOSSIP_MENU();
 				return false;
@@ -69,7 +69,7 @@ public:
 			break;
 
 			case Maelstrom::StoreManager::PURCHASE_RESULT_NOT_ENOUGH_FREE_SLOTS: {
-				player->GetSession()->SendAreaTriggerMessage("You don't have enough free slots in your bags to purchase this item");
+				player->GetSession()->SendAreaTriggerMessage("Vous n'avez pas assez d'espace dans vos sacs pour acheter cet objet.");
 				player->PlayerTalkClass->ClearMenus();
 				player->CLOSE_GOSSIP_MENU();
 				return false;
@@ -77,7 +77,7 @@ public:
 		    break;
 
 			case Maelstrom::StoreManager::PURCHASE_RESULT_SUCCESS: {
-				player->GetSession()->SendAreaTriggerMessage("Thank you for your purchase !");
+				player->GetSession()->SendAreaTriggerMessage("Merci de votre achat !");
 				player->PlayerTalkClass->ClearMenus();
 				player->CLOSE_GOSSIP_MENU();
 				return true;
@@ -90,7 +90,7 @@ public:
 
 		//On récupère les points boutiques du joueur et on les affiche
 		uint32 coins = Maelstrom::sStoreMgr->GetAccountCoins(player->GetSession()->GetAccountId());
-		std::string msgCoins = "You have " + std::to_string(coins) + " store coins";
+		std::string msgCoins = "Vous avez " + std::to_string(coins) + " points";
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, msgCoins.c_str(), GOSSIP_SENDER_MAIN, 0);
 
 		//On récupère la catégorie demandée
@@ -100,7 +100,7 @@ public:
 		std::map<uint32, Maelstrom::StoreManager::StoreItem> items = Maelstrom::sStoreMgr->GetItems(catId, player->GetAverageItemLevel());
 		ItemTemplateContainer const* itemTemplateContainer = sObjectMgr->GetItemTemplateStore();
 		if (!itemTemplateContainer) {
-			player->GetSession()->SendAreaTriggerMessage("Error");
+			player->GetSession()->SendAreaTriggerMessage("Une erreure est survenue");
 			return false;
 		}
 		//On affiche tous les items en question
@@ -113,13 +113,13 @@ public:
 			std::string priceText = std::to_string(currItem.m_price);
 			std::string message = "[" + priceText + "] " + itemName;
 			std::string quantityMsg = currItem.m_quantity == 1 ? "" : " (x" + std::to_string(currItem.m_quantity) + ")";
-			std::string gossip = "[" + priceText + " coins] " + itemName + quantityMsg;
+			std::string gossip = "[" + priceText + " Points] " + itemName + quantityMsg;
 
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, gossip.c_str(), GOSSIP_SENDER_MAIN, MAX_ENTRY + currItem.m_itemEntry);
 		}
 
 		//On ajoute un bouton retour
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Go Back", GOSSIP_SENDER_MAIN, 9000000);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "\n\nRetour", GOSSIP_SENDER_MAIN, 9000000);
 
 		player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 		return true;

@@ -1010,6 +1010,10 @@ void World::LoadConfigSettings(bool reload)
     m_bool_configs[CONFIG_QUEST_IGNORE_AUTO_ACCEPT] = sConfigMgr->GetBoolDefault("Quests.IgnoreAutoAccept", false);
     m_bool_configs[CONFIG_QUEST_IGNORE_AUTO_COMPLETE] = sConfigMgr->GetBoolDefault("Quests.IgnoreAutoComplete", false);
 
+	
+	m_int_configs[CONFIG_CUSTOM_RATE_XP_ENABLED] = sConfigMgr->GetIntDefault("CustomXpRate.enabled", 1);
+	m_int_configs[CONFIG_CUSTOM_RATE_LOOT_ENABLED] = sConfigMgr->GetIntDefault("CustomLootRate.enabled", 1);
+	
     m_int_configs[CONFIG_RANDOM_BG_RESET_HOUR] = sConfigMgr->GetIntDefault("Battleground.Random.ResetHour", 6);
     if (m_int_configs[CONFIG_RANDOM_BG_RESET_HOUR] > 23)
     {
@@ -1055,6 +1059,10 @@ void World::LoadConfigSettings(bool reload)
     m_float_configs[CONFIG_LISTEN_RANGE_SAY]       = sConfigMgr->GetFloatDefault("ListenRange.Say", 25.0f);
     m_float_configs[CONFIG_LISTEN_RANGE_TEXTEMOTE] = sConfigMgr->GetFloatDefault("ListenRange.TextEmote", 25.0f);
     m_float_configs[CONFIG_LISTEN_RANGE_YELL]      = sConfigMgr->GetFloatDefault("ListenRange.Yell", 300.0f);
+	
+	
+	m_int_configs[CONFIG_CUSTOM_LOOT_LEVEL] = sConfigMgr->GetIntDefault("CustomLoot.Level", 255);
+	m_int_configs[CONFIG_CUSTOM_XP_LEVEL] = sConfigMgr->GetIntDefault("CustomXp.Level", 255);
 
     m_bool_configs[CONFIG_BATTLEGROUND_CAST_DESERTER]                = sConfigMgr->GetBoolDefault("Battleground.CastDeserter", true);
     m_bool_configs[CONFIG_BATTLEGROUND_QUEUE_ANNOUNCER_ENABLE]       = sConfigMgr->GetBoolDefault("Battleground.QueueAnnouncer.Enable", false);

@@ -8262,6 +8262,7 @@ int ObjectMgr::LoadReferenceVendor(int32 vendor, int32 item, std::set<uint32> *s
     if (!result)
         return 0;
 
+	
     uint32 count = 0;
     do
     {

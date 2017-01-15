@@ -26653,10 +26653,10 @@ void Player::RemoveRestFlag(RestFlag restFlag)
     }
 }
 void Player::SetSelection(ObjectGuid guid)
-{
-	uint32 m_curSelection = guid;
-	SetUInt64Value(UNIT_FIELD_TARGET, guid);
-}
+ {
+   uint32 m_curSelection = guid;
+   SetUInt64Value(UNIT_FIELD_TARGET, guid);
+ }
 
 void Player::SetSpectate(bool on)
 {

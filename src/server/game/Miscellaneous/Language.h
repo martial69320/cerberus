@@ -1139,18 +1139,7 @@ enum TrinityStrings
     LANG_COMMAND_MUTEHISTORY_EMPTY      = 5060,
     LANG_COMMAND_MUTEHISTORY_OUTPUT     = 5061,
 
-    // Room for more Trinity strings      5062-9999
-	
-	//Custom Rates
-	LANG_RATE_MAXIMUM_LEVEL				= 5062,
-	LANG_RATE_ACTUAL_XP					= 5063,
-	LANG_RATE_INVALID					= 5064,
-	LANG_RATE_MODIFY_XP					= 5065,
-	LANG_RATE_GM_MODIFY_XP				= 5066,
-	LANG_RATE_DISABLED					= 5067,
-	LANG_RATE_MODIFY_LOOT				= 5068,
-	LANG_RATE_GM_MODIFY_LOOT			= 5069,
-	LANG_RATE_ACTUAL_LOOT				= 5070,
+    // Room for more Trinity strings      5062-9999	
 	
 	//Transmogrification
 	LANG_TRANSMO_HEAD					= 5071,

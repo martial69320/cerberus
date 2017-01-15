@@ -18,15 +18,15 @@ public:
 		//On récupère les points boutiques du joueur et on les affiche
 		uint32 coins = Maelstrom::sStoreMgr->GetAccountCoins(player->GetSession()->GetAccountId());
 		std::string msg = "Vous avez " + std::to_string(coins) + " points\n\n";
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, msg.c_str(), GOSSIP_SENDER_MAIN, 0);
+		AddGossipItemFor(player,GOSSIP_ICON_CHAT, msg.c_str(), GOSSIP_SENDER_MAIN, 0);
 
 		//On récupère la liste des catégories
 		std::map<uint32, Maelstrom::StoreManager::StoreCategory> categories = Maelstrom::sStoreMgr->GetCategories();
 		for (auto it = categories.begin(); it != categories.end(); it++){
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, (it->second.m_name).c_str(), GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + it->first);
+			AddGossipItemFor(player,GOSSIP_ICON_CHAT, (it->second.m_name).c_str(), GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + it->first);
 		}
 
-		player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+		SendGossipMenuFor(player,DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 		return true;
 	}
 
@@ -38,7 +38,7 @@ public:
 	{
 
 		if (action == 0) {
-			player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+			SendGossipMenuFor(player,DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 			return true;
 		}
 
@@ -91,7 +91,7 @@ public:
 		//On récupère les points boutiques du joueur et on les affiche
 		uint32 coins = Maelstrom::sStoreMgr->GetAccountCoins(player->GetSession()->GetAccountId());
 		std::string msgCoins = "Vous avez " + std::to_string(coins) + " points";
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, msgCoins.c_str(), GOSSIP_SENDER_MAIN, 0);
+		AddGossipItemFor(player,GOSSIP_ICON_CHAT, msgCoins.c_str(), GOSSIP_SENDER_MAIN, 0);
 
 		//On récupère la catégorie demandée
 		uint32 catId = action - GOSSIP_ACTION_INFO_DEF;
@@ -115,13 +115,13 @@ public:
 			std::string quantityMsg = currItem.m_quantity == 1 ? "" : " (x" + std::to_string(currItem.m_quantity) + ")";
 			std::string gossip = "[" + priceText + " Points] " + itemName + quantityMsg;
 
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, gossip.c_str(), GOSSIP_SENDER_MAIN, MAX_ENTRY + currItem.m_itemEntry);
+			AddGossipItemFor(player,GOSSIP_ICON_CHAT, gossip.c_str(), GOSSIP_SENDER_MAIN, MAX_ENTRY + currItem.m_itemEntry);
 		}
 
 		//On ajoute un bouton retour
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "\n\nRetour", GOSSIP_SENDER_MAIN, 9000000);
+		AddGossipItemFor(player,GOSSIP_ICON_CHAT, "\n\nRetour", GOSSIP_SENDER_MAIN, 9000000);
 
-		player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+		SendGossipMenuFor(player,DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 		return true;
 	}
 

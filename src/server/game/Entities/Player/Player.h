@@ -1513,8 +1513,6 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         size_t GetRewardedQuestCount() const { return m_RewardedQuests.size(); }
         bool IsQuestRewarded(uint32 quest_id) const;
 
-        uint64 GetSelection() const { return m_curSelection; }
-        
         Unit* GetSelectedUnit() const;
         Player* GetSelectedPlayer() const;
 

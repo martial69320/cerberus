@@ -98,4 +98,4 @@ namespace Maelstrom {
 
 }
 
-#endifStoreManager.h
+#endif

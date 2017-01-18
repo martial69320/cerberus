@@ -370,7 +370,7 @@ Unit::~Unit()
             m_currentSpells[i] = nullptr;
         }
 		
-+	// remove view point for spectator
+	// remove view point for spectator
 	if (!m_sharedVision.empty())
 	{
 		for (SharedVisionList::iterator itr = m_sharedVision.begin(); itr != m_sharedVision.end(); ++itr)

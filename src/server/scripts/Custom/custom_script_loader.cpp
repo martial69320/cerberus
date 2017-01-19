@@ -20,7 +20,6 @@
 
 void AddSC_arena_spectator_script();
 void AddSC_accontmounts();
-void AddSC_GOMove_commandscript();
 void AddSC_Transmogrification();
 // The name of this function should match:
 // void Add${NameOfDirectory}Scripts()
@@ -28,6 +27,5 @@ void AddCustomScripts()
 {
 	AddSC_arena_spectator_script();
 	AddSC_accontmounts();
-	AddSC_GOMove_commandscript();
 	AddSC_Transmogrification();
 }

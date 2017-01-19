@@ -55,7 +55,7 @@ public:
 			case Maelstrom::StoreManager::PURCHASE_RESULT_ERROR: {
 				player->GetSession()->SendAreaTriggerMessage("Une erreure est survenue");
 				player->PlayerTalkClass->ClearMenus();
-				player->CLOSE_GOSSIP_MENU();
+				CloseGossipMenuFor(player);
 				return false;
 			}
 			break;
@@ -63,7 +63,7 @@ public:
 			case Maelstrom::StoreManager::PURCHASE_RESULT_NOT_ENOUGH_COINS: {
 				player->GetSession()->SendAreaTriggerMessage("Vous n'avez pas assez de points pour acheter cet objet.");
 				player->PlayerTalkClass->ClearMenus();
-				player->CLOSE_GOSSIP_MENU();
+				CloseGossipMenuFor(player);
 				return false;
 			}
 			break;
@@ -71,7 +71,7 @@ public:
 			case Maelstrom::StoreManager::PURCHASE_RESULT_NOT_ENOUGH_FREE_SLOTS: {
 				player->GetSession()->SendAreaTriggerMessage("Vous n'avez pas assez d'espace dans vos sacs pour acheter cet objet.");
 				player->PlayerTalkClass->ClearMenus();
-				player->CLOSE_GOSSIP_MENU();
+				CloseGossipMenuFor(player);
 				return false;
 			}
 		    break;
@@ -79,7 +79,7 @@ public:
 			case Maelstrom::StoreManager::PURCHASE_RESULT_SUCCESS: {
 				player->GetSession()->SendAreaTriggerMessage("Merci de votre achat !");
 				player->PlayerTalkClass->ClearMenus();
-				player->CLOSE_GOSSIP_MENU();
+				CloseGossipMenuFor(player);
 				return true;
 			}
 			break;

@@ -1,10 +1,12 @@
 #include "Define.h"
 #include "GossipDef.h"
 #include "Item.h"
+#include "Language.h"
 #include "Player.h"
 #include "ScriptedGossip.h"
 #include "ScriptMgr.h"
 #include "Spell.h"
+#include "Transmogrification.h"
 class Reini_NPC : public CreatureScript
 {
 public:
@@ -16,7 +18,7 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
         AddGossipItemFor(player, 0, "Reinitialiser les instances", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
-        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+        SendGossipMenuFor(player, sTransmogrification->SetNpcReiniText, creature->GetGUID());
         return true;
     }
  

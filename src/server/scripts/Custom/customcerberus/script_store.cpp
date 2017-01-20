@@ -3,6 +3,8 @@
 #include "ScriptedGossip.h"
 #include "WorldSession.h"
 #include "ObjectMgr.h"
+#include "Language.h"
+#include "Transmogrification.h"
 
 #define MAX_ENTRY 10000000
 
@@ -26,7 +28,7 @@ public:
 			AddGossipItemFor(player,GOSSIP_ICON_CHAT, (it->second.m_name).c_str(), GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + it->first);
 		}
 
-		SendGossipMenuFor(player,DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+		SendGossipMenuFor(player,sTransmogrification->SetNpcShopText, creature->GetGUID());
 		return true;
 	}
 
@@ -38,7 +40,7 @@ public:
 	{
 
 		if (action == 0) {
-			SendGossipMenuFor(player,DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+			SendGossipMenuFor(player,sTransmogrification->SetNpcShopText, creature->GetGUID());
 			return true;
 		}
 
@@ -119,9 +121,9 @@ public:
 		}
 
 		//On ajoute un bouton retour
-		AddGossipItemFor(player,GOSSIP_ICON_CHAT, "\n\nRetour", GOSSIP_SENDER_MAIN, 9000000);
+		AddGossipItemFor(player,GOSSIP_ICON_CHAT, "Retour", GOSSIP_SENDER_MAIN, 9000000);
 
-		SendGossipMenuFor(player,DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+		SendGossipMenuFor(player,LANG_SHOP_GOSSIP, creature->GetGUID());
 		return true;
 	}
 

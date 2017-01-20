@@ -38,6 +38,8 @@ EndScriptData */
 #include "Config.h"
 #include "ScriptedGossip.h"
 #include "ScriptMgr.h"
+#include "Language.h"
+#include "Transmogrification.h"
 
 int8 UsingGossip;
 
@@ -377,7 +379,7 @@ public:
 		AddGossipItemFor(player,GOSSIP_ICON_CHAT, "|TInterface\\icons\\Achievement_Arena_3v3_7:35:35:-30:0|tGames: 3v3", GOSSIP_SENDER_MAIN, NPC_SPECTATOR_ACTION_3V3_GAMES);
 		//pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "|TInterface\\icons\\Achievement_Arena_5v5_7:35:35:-30:0|tGames: 5v5", GOSSIP_SENDER_MAIN, NPC_SPECTATOR_ACTION_5V5_GAMES);
 		//pPlayer->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "|TInterface\\icons\\Spell_Holy_DevineAegis:35:35:-30:0|tSpectate Specific Player.", GOSSIP_SENDER_MAIN, NPC_SPECTATOR_ACTION_SPECIFIC, "", 0, true);
-		SendGossipMenuFor(player,DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
+		SendGossipMenuFor(player,sTransmogrification->SetNpcArenaText, pCreature->GetGUID());
 		return true;
 	}
 
@@ -393,20 +395,20 @@ public:
 		{
 			AddGossipItemFor(player,GOSSIP_ICON_DOT, " Refresh", GOSSIP_SENDER_MAIN, NPC_SPECTATOR_ACTION_2V2_GAMES);
 			ShowPage(player, action - NPC_SPECTATOR_ACTION_2V2_GAMES, false /*ARENA_TYPE_2v2*/);
-			SendGossipMenuFor(player,DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+			SendGossipMenuFor(player,sTransmogrification->SetNpcArenaText, creature->GetGUID());
 		}
 		//else if (action >= NPC_SPECTATOR_ACTION_3V3_GAMES && action < NPC_SPECTATOR_ACTION_5V5_GAMES)
 		else if (action >= NPC_SPECTATOR_ACTION_3V3_GAMES && action < NPC_SPECTATOR_ACTION_2V2_GAMES)
 		{
 			AddGossipItemFor(player,GOSSIP_ICON_DOT, "Refresh", GOSSIP_SENDER_MAIN, NPC_SPECTATOR_ACTION_3V3_GAMES);
 			ShowPage(player, action - NPC_SPECTATOR_ACTION_3V3_GAMES, true/*ARENA_TYPE_3v3*/);
-			SendGossipMenuFor(player,DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+			SendGossipMenuFor(player,sTransmogrification->SetNpcArenaText, creature->GetGUID());
 		}
 		/*else if (action >= NPC_SPECTATOR_ACTION_5V5_GAMES && action < NPC_SPECTATOR_ACTION_SELECTED_PLAYER)
 		{
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_DOT, "Refresh", GOSSIP_SENDER_MAIN, NPC_SPECTATOR_ACTION_5V5_GAMES);
 			ShowPage(player, action - NPC_SPECTATOR_ACTION_5V5_GAMES, ARENA_TYPE_5v5);
-			player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+			player->SEND_GOSSIP_MENU(sTransmogrification->SetNpcArenaText, creature->GetGUID());
 		}*/
 		else
 		{

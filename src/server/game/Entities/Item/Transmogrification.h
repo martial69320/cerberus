@@ -47,6 +47,10 @@ public:
 
     bool EnableSetInfo;
     uint32 SetNpcText;
+    uint32 SetNpcReiniText;
+    uint32 SetNpcShopText;
+    uint32 SetNpcTransmoText;
+    uint32 SetNpcArenaText;
 
     bool EnableSets;
     uint8 MaxSets;

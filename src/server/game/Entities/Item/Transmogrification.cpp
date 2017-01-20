@@ -639,6 +639,10 @@ void Transmogrification::LoadConfig(bool reload)
 #ifdef PRESETS
     EnableSetInfo = sConfigMgr->GetBoolDefault("Transmogrification.EnableSetInfo", true);
     SetNpcText = uint32(sConfigMgr->GetIntDefault("Transmogrification.SetNpcText", 65001));
+    SetNpcReiniText = uint32(sConfigMgr->GetIntDefault("Transmogrification.SetNpcReiniText", 65002));
+    SetNpcShopText = uint32(sConfigMgr->GetIntDefault("Transmogrification.SetNpcShopText", 65003));
+    SetNpcTransmoText = uint32(sConfigMgr->GetIntDefault("Transmogrification.SetNpcTransmoText", 65004));
+    SetNpcArenaText = uint32(sConfigMgr->GetIntDefault("Transmogrification.SetNpcArenaText", 65005));
 
     EnableSets = sConfigMgr->GetBoolDefault("Transmogrification.EnableSets", true);
     MaxSets = (uint8)sConfigMgr->GetIntDefault("Transmogrification.MaxSets", 10);

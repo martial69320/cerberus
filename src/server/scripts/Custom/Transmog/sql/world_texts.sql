@@ -1,18 +1,18 @@
 SET @TEXT_ID := 65000;
 INSERT INTO `npc_text` (`ID`, `text0_0`) VALUES
-(@TEXT_ID, 'Transmogrification allows you to change how your items look like without changing the stats of the items.\r\nItems used in transmogrification are no longer refundable, tradeable and are bound to you.\r\nUpdating a menu updates the view and prices.\r\n\r\nNot everything can be transmogrified with eachother.\r\nRestrictions include but are not limited to:\r\nOnly armor and weapons can be transmogrified\r\nGuns, bows and crossbows can be transmogrified with eachother\r\nFishing poles can not be transmogrified\r\nYou must be able to equip both items used in the process.\r\n\r\nTransmogrifications stay on your items as long as you own them.\r\nIf you try to put the item in guild bank or mail it to someone else, the transmogrification is stripped.\r\n\r\nYou can also remove transmogrifications for free at the transmogrifier.'),
-(@TEXT_ID+1, 'You can save your own transmogrification sets.\r\n\r\nTo save, first you must transmogrify your equipped items.\r\nThen when you go to the set management menu and go to save set menu,\r\nall items you have transmogrified are displayed so you see what you are saving.\r\nIf you think the set is fine, you can click to save the set and name it as you wish.\r\n\r\nTo use a set you can click the saved set in the set management menu and then select use set.\r\nIf the set has a transmogrification for an item that is already transmogrified, the old transmogrification is lost.\r\nNote that same transmogrification restrictions apply when trying to use a set as in normal transmogrification.\r\n\r\nTo delete a set you can go to the set\'s menu and select delete set.');
+(@TEXT_ID, 'La transmogrification vous permet de modifier l\'apparance de votre équipement sans modifier les stats de celui-ci.\r\nLes objets utilisés dans la transmogrification ne sont plus remboursables, échangeable et sont liés à vous.\r\nLa mise à jour d\'un menu met à jour la vue et les prix.\r\n\r\nLes restrictions comprennent, sans s\'y limiter:\r\nSeules les armures et les armes peuvent être transmogrifiées\r\nFusils, Arcs et arbalètes peuvent être transmogrifiés entre eux\r\nLes cannes à pêche ne peuvent être transmogrifiés\r\nVous devez être en mesure d\'équiper les deux objets utilisés dans le processus.\r\n\r\nLes transmogrifications restent sur vos objets aussi longtemps que vous les possédez.\r\nSi vous essayez de mettre l\'objet dans la banque de guilde ou de le poster à quelqu\'un d\'autre, la transmogrification est supprimée.\r\n\r\nVous pouvez également supprimer les transmogrifications gratuitement au transmogrificateur.'),
+(@TEXT_ID+1, 'Vous pouvez enregistrer vos propres ensembles de transmogrification.\r\n\r\nPour enregistrer, vous devez d\'abord transmogrifier vos objets équipés.\r\nPuis, lorsque vous allez dans le menu de gestion des sets, et que vous allez dans "Enregistrer le set",\r\ntous les objets que vous avez transmogrifiés sont affichés afin que vous voyez ce que vous enregistrez.\r\nSi vous pensez que l\'ensemble est bien, vous pouvez cliquer pour enregistrer l\'ensemble et le nommer comme vous le souhaitez.\r\n\r\nPour utiliser un ensemble, vous pouvez cliquer sur l\'ensemble enregistré dans le menu de gestion des ensembles, puis sélectionner "Utiliser set".\r\nSi l\'ensemble a une transmogrification pour un objet déjà transmogrifié, l\'ancienne est perdue.\r\nNotez que les mêmes restrictions de transmogrification s\'appliquent lorsque vous tentez d\'utiliser un ensemble comme dans la transmogrification normale.\r\n\r\nPour supprimer un ensemble, vous pouvez aller dans le gestionnaire de set et cliquer sur "Supprimer".');
 
 SET @STRING_ENTRY := 11100;
 INSERT INTO `trinity_string` (`entry`, `content_default`) VALUES
-(@STRING_ENTRY+0, 'Item transmogrified'),
-(@STRING_ENTRY+1, 'Equipment slot is empty'),
-(@STRING_ENTRY+2, 'Invalid source item selected'),
-(@STRING_ENTRY+3, 'Source item does not exist'),
-(@STRING_ENTRY+4, 'Destination item does not exist'),
-(@STRING_ENTRY+5, 'Selected items are invalid'),
-(@STRING_ENTRY+6, 'Not enough money'),
-(@STRING_ENTRY+7, 'You don\'t have enough tokens'),
-(@STRING_ENTRY+8, 'Transmogrifications removed'),
-(@STRING_ENTRY+9, 'There are no transmogrifications'),
-(@STRING_ENTRY+10, 'Invalid name inserted');
+(@STRING_ENTRY+0, 'Objet transmogrifié avec succès.'),
+(@STRING_ENTRY+1, 'L\'emplacement de l\'équipement est vide.'),
+(@STRING_ENTRY+2, 'L\'objet source selectionné est incorrects.'),
+(@STRING_ENTRY+3, 'L\'objet source est inexistant.'),
+(@STRING_ENTRY+4, 'L\'emplacement de destination n\'existe pas.'),
+(@STRING_ENTRY+5, 'Les objets sélectionnés sont incorrects.'),
+(@STRING_ENTRY+6, 'Vous n\'avez pas assez d\'or.'),
+(@STRING_ENTRY+7, 'Vous n\'avez pas assez de Token.'),
+(@STRING_ENTRY+8, 'Transmogrifications supprimée avec succès.'),
+(@STRING_ENTRY+9, 'Il n\'y as pas de transmogrifications.'),
+(@STRING_ENTRY+10, 'Le nom d\'ensemble est incorrect.');

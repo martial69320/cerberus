@@ -3998,6 +3998,10 @@ Transmogrification.MaxSets = 10
 
 Transmogrification.EnableSetInfo = 1
 Transmogrification.SetNpcText = 65001
+Transmogrification.SetNpcReiniText = 65002
+Transmogrification.SetNpcShopText = 65003
+Transmogrification.SetNpcTransmoText = 65004
+Transmogrification.SetNpcArenaText = 65005
 
 Transmogrification.SetCostModifier = 3.0
 Transmogrification.SetCopperCost = 0

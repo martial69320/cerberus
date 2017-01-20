@@ -1175,6 +1175,10 @@ enum TrinityStrings
 	LANG_REINI_INSTANCE					= 5100,
 	LANG_REINI_INSTANCE_BYE				= 5101,
 	LANG_REINI_INSTANCE_VALID			= 5102,
+    LANG_REINI_GOSSIP                   = 5103,
+    LANG_SPECTATOR_GOSSIP               = 5104,
+    LANG_TRANSMO_GOSSIP                 = 5105,
+    LANG_SHOP_GOSSIP                    = 5106,
 
     // Level requirement notifications
     LANG_SAY_REQ                        = 6604,

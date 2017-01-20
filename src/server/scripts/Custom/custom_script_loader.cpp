@@ -21,6 +21,9 @@
 void AddSC_arena_spectator_script();
 void AddSC_accontmounts();
 void AddSC_Transmogrification();
+void AddSC_script_store();
+void AddSC_Reini_NPC();
+void AddSC_LearnSpellsOnLevelUp();
 // The name of this function should match:
 // void Add${NameOfDirectory}Scripts()
 void AddCustomScripts()
@@ -28,4 +31,7 @@ void AddCustomScripts()
 	AddSC_arena_spectator_script();
 	AddSC_accontmounts();
 	AddSC_Transmogrification();
+	AddSC_script_store();
+	AddSC_Reini_NPC();
+	AddSC_LearnSpellsOnLevelUp();
 }

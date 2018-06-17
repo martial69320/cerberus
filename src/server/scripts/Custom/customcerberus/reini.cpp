@@ -17,8 +17,8 @@ public:
     bool OnGossipHello(Player *player, Creature *creature)
     {
         player->PlayerTalkClass->ClearMenus();
-        AddGossipItemFor(player, 0, "Reinitialiser les instances", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
-        SendGossipMenuFor(player, sTransmogrification->SetNpcReiniText, creature->GetGUID());
+        AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Reinitialiser les instances", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
     }
  
